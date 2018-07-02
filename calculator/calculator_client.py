@@ -47,10 +47,10 @@ def run():
     print('======================================================================')
 
     # Addition
-    tm_start = time.time()
+    tm_start = time.time() # Get current time before calling RPC
     result = calc.Addition(calculator_pb2.AdditionRequest(fstOperandAdd=fstOperand, scdOperandAdd=scdOperand)).resultAdd
-    tm_end = time.time()
-    print('%f + %f = %f [%s]' % (fstOperand, scdOperand, result, tm_end - tm_start))
+    tm_end = time.time() # Get current time after calling RPC
+    print('%f + %f = %f [%s]' % (fstOperand, scdOperand, result, tm_end - tm_start)) # print results
     
     # Subtraction
     tm_start = time.time()
