@@ -1,4 +1,4 @@
-syntax = "proto3"
+syntax = "proto3";
 
 service StringFormatter {
     rpc Upper (UpperRequest) returns (UpperReply); // makes all chars in string upper case 
