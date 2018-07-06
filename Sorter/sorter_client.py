@@ -98,8 +98,10 @@ def run():
     
     print('LISTA:\n%s' % (str(LIST)))
     print('========================')
+    sttTime = time.time()
     LIST = sort(LIST)
-    print('LISTA ORDENADA:\n%s' % (str(LIST)))
+    endTime = time.time(0)
+    print('LISTA ORDENADA[%.5f]:\n%s' % (endTime - sttTime, str(LIST)))
 
 
 
