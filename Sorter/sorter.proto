@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+service StringFormatter {
+    rpc sort (sortRequest) returns (sortReply); // orders elements
+}
+
+
+message sortRequest{
+    string sortReq = 1;
+}
+message UpperReply{
+    string sortRep = 1;
+}
+
+//COMMAND LINE TO COMPILE: python -m grpc_tools.protoc -I../../protos --python_out=. --grpc_python_out=. ../../protos/route_guide.proto
