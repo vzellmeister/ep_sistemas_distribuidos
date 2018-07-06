@@ -94,7 +94,7 @@ def run():
     
     print('List will be %d elements long' % (LIST_SIZE)) # Get list size
 
-    LIST_TYPES[LIST_TYPE_CHOICE]['function'](LIST, LIST_SIZE) # Populate list
+    LIST_TYPES[LIST_TYPE_CHOICE]['function'](LIST, int(LIST_SIZE)) # Populate list
     
     print('LISTA:\n%s' % (str(LIST)))
     print('========================')

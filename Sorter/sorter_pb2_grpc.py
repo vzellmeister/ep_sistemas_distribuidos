@@ -4,7 +4,7 @@ import grpc
 import sorter_pb2 as sorter__pb2
 
 
-class StringFormatterStub(object):
+class SorterStub(object):
   # missing associated documentation comment in .proto file
   pass
 
@@ -15,13 +15,13 @@ class StringFormatterStub(object):
       channel: A grpc.Channel.
     """
     self.sort = channel.unary_unary(
-        '/StringFormatter/sort',
+        '/Sorter/sort',
         request_serializer=sorter__pb2.sortRequest.SerializeToString,
         response_deserializer=sorter__pb2.sortReply.FromString,
         )
 
 
-class StringFormatterServicer(object):
+class SorterServicer(object):
   # missing associated documentation comment in .proto file
   pass
 
@@ -33,7 +33,7 @@ class StringFormatterServicer(object):
     raise NotImplementedError('Method not implemented!')
 
 
-def add_StringFormatterServicer_to_server(servicer, server):
+def add_SorterServicer_to_server(servicer, server):
   rpc_method_handlers = {
       'sort': grpc.unary_unary_rpc_method_handler(
           servicer.sort,
@@ -42,5 +42,5 @@ def add_StringFormatterServicer_to_server(servicer, server):
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
-      'StringFormatter', rpc_method_handlers)
+      'Sorter', rpc_method_handlers)
   server.add_generic_rpc_handlers((generic_handler,))

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-service StringFormatter {
+service Sorter {
     rpc sort (sortRequest) returns (sortReply); // orders elements
 }
 

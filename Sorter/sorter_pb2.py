@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='sorter.proto',
   package='',
   syntax='proto3',
-  serialized_pb=_b('\n\x0csorter.proto\"\x1e\n\x0bsortRequest\x12\x0f\n\x07sortReq\x18\x01 \x01(\t\"\x1c\n\tsortReply\x12\x0f\n\x07sortRep\x18\x01 \x01(\t23\n\x0fStringFormatter\x12 \n\x04sort\x12\x0c.sortRequest\x1a\n.sortReplyb\x06proto3')
+  serialized_pb=_b('\n\x0csorter.proto\"\x1e\n\x0bsortRequest\x12\x0f\n\x07sortReq\x18\x01 \x01(\t\"\x1c\n\tsortReply\x12\x0f\n\x07sortRep\x18\x01 \x01(\t2*\n\x06Sorter\x12 \n\x04sort\x12\x0c.sortRequest\x1a\n.sortReplyb\x06proto3')
 )
 
 
@@ -106,18 +106,18 @@ _sym_db.RegisterMessage(sortReply)
 
 
 
-_STRINGFORMATTER = _descriptor.ServiceDescriptor(
-  name='StringFormatter',
-  full_name='StringFormatter',
+_SORTER = _descriptor.ServiceDescriptor(
+  name='Sorter',
+  full_name='Sorter',
   file=DESCRIPTOR,
   index=0,
   options=None,
   serialized_start=78,
-  serialized_end=129,
+  serialized_end=120,
   methods=[
   _descriptor.MethodDescriptor(
     name='sort',
-    full_name='StringFormatter.sort',
+    full_name='Sorter.sort',
     index=0,
     containing_service=None,
     input_type=_SORTREQUEST,
@@ -125,8 +125,8 @@ _STRINGFORMATTER = _descriptor.ServiceDescriptor(
     options=None,
   ),
 ])
-_sym_db.RegisterServiceDescriptor(_STRINGFORMATTER)
+_sym_db.RegisterServiceDescriptor(_SORTER)
 
-DESCRIPTOR.services_by_name['StringFormatter'] = _STRINGFORMATTER
+DESCRIPTOR.services_by_name['Sorter'] = _SORTER
 
 # @@protoc_insertion_point(module_scope)
