@@ -55,7 +55,7 @@ def run():
 
     while True:
         chosenOption = str(input(
-            'What would you like to do with the string "%s"?\n%s' % (
+            'What would you like to do with the string "%s"?\n%s\n' % (
                 string,
                 ('\n').join([k + ' - ' + v['title'] for k, v in OPTIONS.items()])
             )
@@ -65,6 +65,10 @@ def run():
             break
         print('This is not a valid option. Please choose from the above.')
 
+    sttTime = time.time()
+    rString = OPTIONS[chosenOption]['function'](string)
+    endTime = time.time()
+    print('RESULT: "%s" %s' % (rString, endTime - sttTime))
 
 if __name__ == '__main__':
     run()
