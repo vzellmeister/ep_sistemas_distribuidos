@@ -27,13 +27,21 @@ import stringFormatter_pb2_grpc
 #==============================================================================
 CHANNEL = grpc.insecure_channel('localhost:50051')
 FORMATTER = stringFormatter_pb2_grpc.StringFormatterStub(CHANNEL)
-CHOICE_PROMPT = ('''
-What would you like to do with your string?
-    1 - Upper
-    2 - Lower
-    3 - Capitalize
-''')
+
 GET_STR_PROMPT = ('Please insert string to operate:\n')
+
+# All options; keys are numbers, sub dictionary contains titles and functions (via lambda)
+OPTIONS ={
+    '1': {'title': 'Upper', 'function': (
+            lambda string: FORMATTER.Upper( stringFormatter_pb2.UpperRequest( upperReqStr=string ) ).upperRepStr
+            )},
+    '2': {'title': 'Lower', 'function': (
+            lambda string: FORMATTER.Lower( stringFormatter_pb2.LowerRequest( lowerReqStr=string) ).lowerRepStr
+    )},
+    '3': {'title': 'Capitalize', 'function': (
+            lambda string: FORMATTER.Proper( stringFormatter_pb2.ProperRequest( propReqStr=string) ).propRepStr
+    )}
+}
 
 #==============================================================================
 #                                     MAIN
@@ -41,14 +49,21 @@ GET_STR_PROMPT = ('Please insert string to operate:\n')
 def run():
     # Get input string
     string = str(input(GET_STR_PROMPT)) # Get value
-    print('STRING = "%s"' % (string))
 
-    print('======================================================================')
+    print()
+    print(  )
 
     while True:
-        chosenOption = str( input(CHOICE_PROMPT) )
-        if chosenOption.isnumeric() and int(chosenOption) >= 1 and int(chosenOption) <= 3:
-            print('')
+        chosenOption = str(input(
+            'What would you like to do with the string "%s"?\n%s' % (
+                string,
+                ('\n').join([k + ' - ' + v['title'] for k, v in OPTIONS.items()])
+            )
+        ))
+        if chosenOption in OPTIONS.keys():
+            print('Option: %s' % (chosenOption))
+            break
+        print('This is not a valid option. Please choose from the above.')
 
 
 if __name__ == '__main__':
