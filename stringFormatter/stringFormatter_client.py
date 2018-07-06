@@ -53,22 +53,23 @@ def run():
     print()
     print(  )
 
+    # Validation loop for getting input
     while True:
         chosenOption = str(input(
-            'What would you like to do with the string "%s"?\n%s\n' % (
+            'What would you like to do with the string "%s"?\n%s\n' % ( # Prompt for string
                 string,
-                ('\n').join([k + ' - ' + v['title'] for k, v in OPTIONS.items()])
+                ('\n').join([k + ' - ' + v['title'] for k, v in OPTIONS.items()]) # build menu from options
             )
         ))
-        if chosenOption in OPTIONS.keys():
+        if chosenOption in OPTIONS.keys(): # Break if correct option is chosen
             print('Option: %s' % (chosenOption))
             break
-        print('This is not a valid option. Please choose from the above.')
+        print('This is not a valid option. Please choose from the above.') # Indicate error to user
 
-    sttTime = time.time()
-    rString = OPTIONS[chosenOption]['function'](string)
-    endTime = time.time()
-    print('RESULT: "%s" %s' % (rString, endTime - sttTime))
+    sttTime = time.time() # Get time stamp before executing RPC
+    rString = OPTIONS[chosenOption]['function'](string) # execute RPC
+    endTime = time.time() # Get time after RPC
+    print('RESULT: "%s" [%.5f s]' % (rString, endTime - sttTime)) # Print result and time diff
 
 if __name__ == '__main__':
     run()
