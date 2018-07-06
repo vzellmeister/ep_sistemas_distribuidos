@@ -10,7 +10,7 @@ import sorter_pb2_grpc
 _ONE_DAY_IN_SECONDS = 60 * 60 * 24
 
 
-class Sorter(sorter_pb2_grpc.StringFormatterServicer):
+class Sorter(sorter_pb2_grpc.SorterServicer):
 
     def sort(self, request, context):
         print('Received Sort request [%s]' % (time.strftime('%H:%M:%S', time.gmtime())))
@@ -18,7 +18,7 @@ class Sorter(sorter_pb2_grpc.StringFormatterServicer):
 
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
-    sorter_pb2_grpc.add_CalculatorServicer_to_server(Calculator(), server)
+    sorter_pb2_grpc.add_SorterServicer_to_server(Sorter(), server)
     server.add_insecure_port('[::]:50051')
     server.start()
     try:

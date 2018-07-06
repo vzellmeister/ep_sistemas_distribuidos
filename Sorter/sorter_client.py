@@ -31,24 +31,28 @@ import string
 def sort(obj):
     if not isinstance(obj, list):
         raise TypeError('Sorter only accepts list objects. Passed object was of type: "%s"' % (obj.__class__.__name__ ))
-    return SORTER.sort( sorter_pb2.sortRequest(sortReq= pickle.dumps(obj) ) ).sortRep
+    return SORTER.sort( sorter_pb2.sortRequest( sortReq= str(pickle.dumps(obj)) ) ).sortRep
 
-def getElements(l, sz):
+def getElements(sz):
     print('manual generation %d' % (sz))
+    l = []
     for i in range(0, sz):
         l.append( input(PROMPT_ADD_ITEM.replace('<i>', '%2d' % (i + 1))) )
+    return l
 
-def rndElements(l, sz):
+def rndElements(sz):
     print('random generation %d' % (sz))
+    l = []
     for i in range(0, sz):
-        l.append(''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(random.randint(1, 100))))
+        l.append( ''.join([chr( random.randint(33,125) ) for i in range(0, random.randint(1, 10))]) )
+    return l
 
 
 #==============================================================================
 #                                  GLOBAL VARS
 #==============================================================================
 CHANNEL = grpc.insecure_channel('localhost:50051')
-SORTER = sorter_pb2_grpc.StringFormatterStub(CHANNEL)
+SORTER = sorter_pb2_grpc.SorterStub(CHANNEL)
 PROMPT_LIST_SIZE = 'Please set the number of items for your list:\n'
 PROMPT_ADD_ITEM = 'Please set item number <i>:\n'
 PROMPT_TYPE_OF_LIST = 'Would you like to:\n[1] manually set the elements of your list OR\n[2] randomly generate the elements of your list?   '
@@ -74,27 +78,29 @@ LIST = []
 #                                     MAIN
 #==============================================================================
 def run():
+    LIST_SIZE = 100
+    LIST = rndElements(LIST_SIZE)
+
+    # while(True):
+    #     LIST_TYPE_CHOICE = input(PROMPT_TYPE_OF_LIST)
+    #     if LIST_TYPE_CHOICE in LIST_TYPES.keys():
+    #         print(LIST_TYPE_CHOICE.upper())
+    #         break
+    #     print('Invalid choice.')
+
+    # print('List of type %s chosen' % (LIST_TYPES[LIST_TYPE_CHOICE]['name']))
+
+    # while(True):
+    #     LIST_SIZE = str( input(PROMPT_LIST_SIZE) ) # get list size
+    #     if LIST_SIZE.isnumeric:
+    #         LIST_SIZE = int(LIST_SIZE)
+    #         break
+    #     print('Invalid number.')
     
+    # print('List will be %d elements long' % (LIST_SIZE)) # Get list size
 
-    while(True):
-        LIST_TYPE_CHOICE = input(PROMPT_TYPE_OF_LIST)
-        if LIST_TYPE_CHOICE in LIST_TYPES.keys():
-            print(LIST_TYPE_CHOICE.upper())
-            break
-        print('Invalid choice.')
+    # LIST_TYPES[LIST_TYPE_CHOICE]['function'](LIST, int(LIST_SIZE)) # Populate list
 
-    print('List of type %s chosen' % (LIST_TYPES[LIST_TYPE_CHOICE]['name']))
-
-    while(True):
-        LIST_SIZE = str( input(PROMPT_LIST_SIZE) ) # get list size
-        if LIST_SIZE.isnumeric:
-            LIST_SIZE = int(LIST_SIZE)
-            break
-        print('Invalid number.')
-    
-    print('List will be %d elements long' % (LIST_SIZE)) # Get list size
-
-    LIST_TYPES[LIST_TYPE_CHOICE]['function'](LIST, int(LIST_SIZE)) # Populate list
     
     print('LISTA:\n%s' % (str(LIST)))
     print('========================')
