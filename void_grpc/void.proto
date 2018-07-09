@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+service Doer {
+    rpc DoSomething (Empty) returns (Empty); // Does nothing
+}
+
+message Empty {}

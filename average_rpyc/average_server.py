@@ -12,11 +12,8 @@ class Averager( rpyc.Service ):
 def serve():
     t = ThreadedServer(Averager, port=50051)
     t.start()
-    try:
-        while True:
-            time.sleep(600)
-    except KeyboardInterrupt:
-        server.stop(0)
+    while True:
+        time.sleep(600)
 
 
 if __name__ == "__main__":
