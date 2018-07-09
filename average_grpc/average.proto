@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+message List {
+    repeated int64 values = 1;
+}
+
+message avg{
+    int64 num = 1;
+}
+
+service Averager {
+    rpc avgit(List) returns (avg) {}
+}
