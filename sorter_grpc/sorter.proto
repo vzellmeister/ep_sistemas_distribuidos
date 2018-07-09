@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+message List {
+    repeated float values = 1;
+}
+
+service Sorter {
+    rpc sortit(List) returns (List) {}
+}

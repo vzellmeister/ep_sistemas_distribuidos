@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+message Data {
+    message Play {
+        float time = 1;
+        float precision = 2;
+        int32 timestamp = 3;
+    }
+    message Level {
+        int32 bonus = 1;
+        float multiplier = 2;
+    }
+    int32 id = 1;
+    string username = 2;
+    Level level = 3;
+    repeated Play plays = 4;
+}
+
+message Score {
+    int32 score = 1;
+}
+
+service Analyzer {
+    rpc score(Data) returns (Score) {}
+}
